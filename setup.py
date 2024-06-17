@@ -14,12 +14,13 @@ class PostInstallCommand(install):
         subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_lg"])
         install.run(self)
 
+
 setup(
-    name="my_anonymizer",
-    version="0.1.0",
-    description="A package for text anonymization and deanonymization using Presidio and OpenAI",
-    author="Your Name",
-    author_email="your.email@example.com",
+    name="rbs_pii_anonymizer",
+    version="1.0.0",
+    description="A python package for text pseudonymization using presidio",
+    author="Zein Ramadan",
+    author_email="zein.ramadan@bigspark.dev",
     packages=find_packages(),
     install_requires=[
         "fastapi",
