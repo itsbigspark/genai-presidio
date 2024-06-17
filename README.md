@@ -14,19 +14,19 @@ The project follows a structured layout to organize the code, configurations, an
 ```
 presidio/
 ├── anonymizer/
-│ ├── init.py
-│ └── anonymizer.py
+│   ├── __init__.py
+│   └── anonymizer.py
 ├── main.py
 ├── README.md
 ├── requirements.txt
+├── setup.py
 ├── .env.example
 ├── .gitignore
-├──tests/
-│ ├── init.py
-│ ├── test_anonymizer.py
-│ └── test_sortcode_recognizer.py
+└── tests/
+    ├── __init__.py
+    ├── test_anonymizer.py
+    └── test_sortcode_recognizer.py
 ```
-
 
 ### Directory and File Descriptions
 
