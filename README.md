@@ -2,8 +2,6 @@
 
 A package for text anonymization and deanonymization (pseudonymization) using Presidio.
 
-
-
 ## Recognizers
 
 - All built-in presidion recognizers
