@@ -63,6 +63,11 @@ conda activate presidio
 pip install -r requirements.txt
 ```
 
+### Install the spacy model used in the presidio package
+```sh
+python -m spacy download en_core_web_lg
+```
+
 ### Copy the .env.example file to .env and setup OpenAI API key:
 
 Copy example .env file to actual .env:
