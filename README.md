@@ -55,6 +55,10 @@ Overview of installation steps:
 - Clone the repo 
 - Create conda environment
 - Setup OpenAI API key to use LLM endpoint in main.py
+- Build presidio anonymizer code as a pip package
+- Install pip package locally
+- Run the FastAPI application locally
+- Voilà!
 
 ### Create conda environment and install requirements
 ```sh
@@ -64,6 +68,7 @@ pip install -r requirements.txt
 ```
 
 ### Install the spacy model used in the presidio package
+Run this in terminal in the project directory:
 ```sh
 python -m spacy download en_core_web_lg
 ```
@@ -80,12 +85,32 @@ In .env add the OpenAI API key
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-### Run FastAPI app
+### Package the presidio code
 
-The application will be available at http://127.0.0.1:8000/
+To build the pip package with the anonymizer code we use the setup.py script, run this command in the project working directory.
+```sh
+python setup.py sdist bdist_wheel
+```
+
+
+
+Once the package is built, we need to install it locally using pip so we can use it in the FastAPI application.
+
+Uninstall first if already installed (no need to do this if installing package for first time)
+
+```sh
+pip uninstall rbs_pii_anonymizer  # Optional 
+pip install .
+```
+
+### Run FastAPI app
+Once package is built and installed locally, we can now run the FastAPI application locally and test out the endpoint.
+Run the following command to run the application:
+
 ```sh
 uvicorn main:app --reload
 ```
+The application will be available at http://127.0.0.1:8000/
 
 API Endpoints:
 ```
