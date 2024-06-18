@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
+# from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from anonymizer.anonymizer import setup_presidio
 from presidio_anonymizer import OperatorConfig
@@ -23,8 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# # Mount static files
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Setup Presidio components
 analyzer, anonymizer_engine, deanonymizer_engine, _ = setup_presidio()
@@ -67,14 +67,16 @@ async def process_text(request: ProcessRequest):
         anonymized_text = anonymized_result.text  # Get the anonymized input text
         entity_mapping = anonymized_result.items  # Get the updated entity mapping specific to current request
 
-        # Step 2: Send anonymized text to OpenAI API
-        # TODO: prompt engineering to explain to model to preserve anonymized text in response (be consistent)
-        response = openai.Completion.create(
-            engine="text-davinci-003",  # Choose the appropriate engine
-            prompt=anonymized_text,
-            max_tokens=150  # Adjust max tokens based on your needs
-        )
-        anonymized_llm_response = response.choices[0].text.strip()
+        # # Step 2: Send anonymized text to OpenAI API
+        # # TODO: prompt engineering to explain to model to preserve anonymized text in response (be consistent)
+        # response = openai.Completion.create(
+        #     engine="text-davinci-003",  # Choose the appropriate engine
+        #     prompt=anonymized_text,
+        #     max_tokens=150  # Adjust max tokens based on your needs
+        # )
+        # anonymized_llm_response = response.choices[0].text.strip()
+
+        anonymized_llm_response = anonymized_text
 
         # Step 3: Deanonymize the LLM response
         deanonymized_text = deanonymizer_engine.deanonymize(
@@ -86,7 +88,7 @@ async def process_text(request: ProcessRequest):
         )
 
         # Return the deanonymized response
-        return ProcessResponse(text=deanonymized_text)
+        return ProcessResponse(text=deanonymized_text.text)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
