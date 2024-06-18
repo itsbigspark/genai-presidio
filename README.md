@@ -60,7 +60,7 @@ Overview of installation steps:
 
 ### Create conda environment and install requirements
 ```sh
-conda create --name presidio python=3.12 pip
+conda create --name presidio python=3.12 pip=24.0
 conda activate presidio
 pip install -r requirements.txt
 ```
