@@ -7,9 +7,6 @@ import sys
 class PostInstallCommand(install):
     """Post-installation for installation mode."""
     def run(self):
-        # Install required packages
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
-
         # Ensure the spaCy model is downloaded
         subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_lg"])
         install.run(self)
@@ -23,13 +20,8 @@ setup(
     author_email="zein.ramadan@bigspark.dev",
     packages=find_packages(),
     install_requires=[
-        "fastapi",
-        "uvicorn",
-        "requests",
         "presidio-analyzer",
         "presidio-anonymizer",
-        "pydantic",
-        "openai",
         "spacy"
     ],
     cmdclass={
