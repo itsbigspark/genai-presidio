@@ -6,11 +6,11 @@ from fastapi.responses import HTMLResponse
 from anonymizer.anonymizer import setup_presidio
 from presidio_anonymizer import OperatorConfig
 import openai
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env file
-load_dotenv()
+# # Load environment variables from .env file
+# load_dotenv()
 
 app = FastAPI()
 
@@ -29,10 +29,10 @@ app.add_middleware(
 # Setup Presidio components
 analyzer, anonymizer_engine, deanonymizer_engine, _ = setup_presidio()
 
-# Set your OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
-if openai.api_key is None:
-    raise ValueError("OpenAI API key is not set. Please set the OPENAI_API_KEY environment variable.")
+# # Set your OpenAI API key
+# openai.api_key = os.getenv("OPENAI_API_KEY")
+# if openai.api_key is None:
+#     raise ValueError("OpenAI API key is not set. Please set the OPENAI_API_KEY environment variable.")
 
 
 class ProcessRequest(BaseModel):
