@@ -14,8 +14,16 @@ presidio/
 ├── anonymizer/
 │   ├── __init__.py
 │   └── anonymizer.py
+├── fastapi_app/
+│   ├── pseudonomyzation.ipynb
+│   ├── SortCode_Anon.ipynb
+│   ├── SortCode_Context.ipynb
+│   └── Test.ipynb
+├── notebooks/
+│   ├── __init__.py
+│   └── main.py
 ├── README.md
-├── requirements.txt
+├── environment.yml
 ├── setup.py
 ├── .gitignore
 └── tests/
