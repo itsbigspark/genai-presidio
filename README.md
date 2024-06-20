@@ -30,50 +30,66 @@ presidio/
   - `__init__.py`: An initialization file for the package. It makes the directory a Python package and allows you to import the `setup_presidio` function.
   - `anonymizer.py`: Contains the implementation of the Presidio setup and custom anonymizer logic.
 
-- `README.md`: The main documentation file for the project. It provides an overview, installation instructions, and usage examples.
-
-- `requirements.txt`: Lists the dependencies required for the project. These can be installed using `pip`.
-
-- `.gitignore`: Specifies files and directories that should be ignored by Git. This typically includes environment files like `.env`.
-
 - `tests/`: Directory containing test cases for the project.
   - `__init__.py`: Initialization file for the tests directory.
   - `test_anonymizer.py`: Contains test cases for the anonymizer functionalities.
   - `test_sortcode_recognizer.py`: Contains test cases for the sort code recognizer.
+  
+- `fastapi_app/`: The main directory for the fastapi application
+  - `__init__.py`: An initialization file for the package.
+  - `main.py`: FastAPI application containing the endpoints to interact with the presidio package
+
+- `notebooks/`: Directory containing Jupyter notebooks for dev work on presidio components.
+
+- `setup.py`: Setup script that packages up the presidio anonymizer code as a pip package.
+
+- `README.md`: The main documentation file for the project. It provides an overview, installation instructions, and usage examples.
+
+- `environment.yaml`: Conda environment yaml file.
+
+- `.gitignore`: Specifies files and directories that should be ignored by Git. This typically includes environment files like `.env`.
+
 
 ## Installation
 
-Overview of installation steps:
-- Clone the repo
-- Build presidio anonymizer code as a pip package
-- Install pip package locally
-- Voilà!
-
-### Create conda environment and install requirements
+### Create conda environment 
 ```sh
-conda create --name presidio python=3.12 pip=24.0
-conda activate presidio
-pip install -r requirements.txt
+conda env create -f environment.yml
 ```
 
-### Install the spacy model used in the presidio package
-Run this in terminal in the project directory:
-```sh
-python -m spacy download en_core_web_lg
-```
-
-### Package the presidio code
+### Packaging the presidio code
 
 To build the pip package with the anonymizer code we use the setup.py script, run this command in the project working directory.
 ```sh
 python setup.py sdist bdist_wheel
 ```
 
-Once the package is built, we need to install it locally using pip so we can use it in the FastAPI application.
+Once the setup.py is complete it will create the dist folder which will contain the package to be uploaded to whatever package repository needed.
 
-Uninstall first if already installed (no need to do this if installing package for first time)
+
+## Running the FastAPI application
+Run the following command to run the application locally:
 
 ```sh
-pip uninstall rbs_pii_anonymizer  # Optional 
-pip install .
+uvicorn main:app --reload
+```
+The application will be available at http://127.0.0.1:8000/
+
+API Endpoints:
+```
+GET /: Serve the index page.
+POST /api/process: Anonymize input text, send it to the OpenAI API, and deanonymize the response.
+```
+    
+Example Request:
+
+```sh
+curl -X POST "http://127.0.0.1:8000/api/process" -H "Content-Type: application/json" -d '{"text": "Your input text here."}'
+```
+
+Example response:
+```json
+{
+  "text": "Processed and deanonymized response text."
+}
 ```

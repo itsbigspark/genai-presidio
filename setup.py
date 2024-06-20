@@ -6,7 +6,7 @@ setup(
     description="A python package for text pseudonymization using presidio",
     author="Zein Ramadan",
     author_email="zein.ramadan@bigspark.dev",
-    packages=find_packages(),
+    packages=find_packages(include=["anonymizer", "anonymizer.*", "tests", "tests.*"]),
     install_requires=[
         "presidio-analyzer",
         "presidio-anonymizer",
