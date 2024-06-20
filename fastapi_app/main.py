@@ -96,4 +96,4 @@ async def process_text(request: ProcessRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 # To run the FastAPI app, use the command below:
-# uvicorn fast_api.main:app --reload
+# uvicorn fastapi_app.main:app --reload
