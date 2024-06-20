@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="rbs_pii_anonymizer",
+    name="rbs-pii-anonymizer",
     version="1.0.0",
     description="A python package for text pseudonymization using presidio",
     author="Zein Ramadan",
