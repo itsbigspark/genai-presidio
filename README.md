@@ -15,13 +15,13 @@ presidio/
 │   ├── __init__.py
 │   └── anonymizer.py
 ├── fastapi_app/
+│   ├── __init__.py
+│   └── main.py
+├── notebooks/
 │   ├── pseudonomyzation.ipynb
 │   ├── SortCode_Anon.ipynb
 │   ├── SortCode_Context.ipynb
 │   └── Test.ipynb
-├── notebooks/
-│   ├── __init__.py
-│   └── main.py
 ├── README.md
 ├── environment.yml
 ├── setup.py
